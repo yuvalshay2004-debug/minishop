@@ -1,5 +1,5 @@
 async function loadProducts() {
-    const res = await fetch("http://back:5000/products");
+    const res = await fetch("http://backend:5000/products");
     const data = await res.json();
 
     const list = document.getElementById("product-list");
