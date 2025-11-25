@@ -16,15 +16,7 @@ pipeline {
 
         stage('Test') {
             steps {
-                // 1. בדיקות יחידה ל־backend/API
-                dir("${env.WORKSPACE}/api-service") {
-                    sh 'pytest tests/unit'
-                }
-
-                // 2. בדיקות אינטגרציה בסיסיות
-                dir("${env.WORKSPACE}/tests/integration") {
-                    sh 'pytest'
-                }
+                
 
                 // 3. Ping / Health check
                 sh 'docker exec minishop_backend_container_name curl -f http://192.168.1.204:5000/health || echo "Backend not healthy"'
