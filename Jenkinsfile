@@ -4,31 +4,30 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                // שימוש ב־absolute path יחסית ל־workspace של Jenkins
-                dir("${env.WORKSPACE}"){      
-                       sh 'docker compose build'
-
+                dir("${env.WORKSPACE}") {
+                    echo "Building Docker images..."
+                    sh 'docker compose build'
                 }
             }
         }
 
         stage('Test') {
             steps {
-   	
+                echo "No tests defined yet"
+                // אפשר להוסיף כאן בדיקות בעתיד
             }
         }
 
         stage('Deploy') {
             steps {
                 dir("${env.WORKSPACE}") {
-                    // עצירת הקונטיינרים הקיימים לפי שם מדויק
+                    echo "Stopping old containers..."
                     sh 'docker compose down --remove-orphans'
 
-                    // הרצה מחדש עם docker-compose
+                    echo "Starting containers..."
                     sh 'docker compose up -d'
                 }
             }
         }
     }
 }
-
