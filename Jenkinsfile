@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 // שימוש ב־absolute path יחסית ל־workspace של Jenkins
-                dir("${env.WORKSPACE}")      
+                dir("${env.WORKSPACE}"){      
                        sh 'docker compose build'
 
                 }
@@ -22,7 +22,7 @@ pipeline {
             steps {
                 dir("${env.WORKSPACE}") {
                     // עצירת הקונטיינרים הקיימים לפי שם מדויק
-                    sh 'docker compose down'
+                    sh 'docker compose down --remove-orphans'
 
                     // הרצה מחדש עם docker-compose
                     sh 'docker compose up -d'
