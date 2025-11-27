@@ -1,12 +1,13 @@
-version: "3"
 services:
   backend:
-    image: minishop/backend
+    build:
+      context: ./api-service
     ports:
       - "5000:5000"
 
   frontend:
-    image: minishop/frontend
+    build:
+      context: ./frontend-service
     ports:
       - "8081:80"
     depends_on:
